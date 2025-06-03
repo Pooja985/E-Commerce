@@ -1,0 +1,12 @@
+/* Add spacing and visuals for mobile and cleaner UI */
+.card {
+  border-radius: 12px;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+img {
+  object-fit: cover;
+}

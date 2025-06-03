@@ -1,0 +1,16 @@
+.category-btn {
+  background-color: #0066ff; /* Replace with your theme color */
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.category-btn:hover {
+  background-color: #0051cc; /* Slightly darker for hover */
+  color: #fff;
+  transform: scale(1.02);
+}
