@@ -122,8 +122,8 @@ const HomePage = () => {
                 className="d-flex flex-column"
                 onChange={(e) => setCheckedRadio(e.target.value)}
               >
-                {Prices?.map((p) => (
-                  <Radio key={p._id} value={p.array}>
+                {Prices?.map((p, i) => (
+                  <Radio key={i} value={p.array}>
                     {p.name}
                   </Radio>
                 ))}
