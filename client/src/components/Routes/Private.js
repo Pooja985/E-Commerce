@@ -16,14 +16,11 @@ export default function PrivateRoute() {
           return;
         }
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/auth/user-auth`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`, // Ensure "Bearer " is included
-            },
-          }
-        );
+        const res = await axios.get(`/api/v1/auth/user-auth`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`, // Ensure "Bearer " is included
+          },
+        });
 
         console.log("Auth Check Response:", res.data);
 

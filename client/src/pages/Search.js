@@ -27,7 +27,7 @@ const Search = () => {
             <div key={product._id} className="col-md-6 col-lg-4">
               <div className="card h-100 shadow-sm">
                 <img
-                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                  src={`/api/v1/product/product-photo/${product._id}`}
                   className="card-img-top"
                   alt={product.name}
                   style={{ height: "250px", objectFit: "cover" }}

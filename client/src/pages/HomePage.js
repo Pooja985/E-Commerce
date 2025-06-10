@@ -23,9 +23,7 @@ const HomePage = () => {
 
   const getTotal = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/product-count`
-      );
+      const { data } = await axios.get(`/api/v1/product/product-count`);
       setTotal(data.count);
     } catch (error) {
       console.error(error);
@@ -35,9 +33,7 @@ const HomePage = () => {
 
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/category/get-category`
-      );
+      const { data } = await axios.get(`/api/v1/category/get-category`);
       if (data.success) setCategories(data.categories);
     } catch (error) {
       console.error(error);
@@ -48,9 +44,7 @@ const HomePage = () => {
   const getProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
-      );
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -62,9 +56,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
-      );
+      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts((prev) => [...prev, ...data.products]);
     } catch (error) {
@@ -81,10 +73,10 @@ const HomePage = () => {
 
   const getFilteredProduct = async () => {
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/product-filter`,
-        { checked, checkedRadio }
-      );
+      const { data } = await axios.post(`/api/v1/product/product-filter`, {
+        checked,
+        checkedRadio,
+      });
       setProducts(data?.product);
     } catch (error) {
       console.error(error);
@@ -155,7 +147,7 @@ const HomePage = () => {
                 <div key={product._id} className="col-md-6 col-lg-4">
                   <div className="card h-100 shadow-sm">
                     <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                      src={`/api/v1/product/product-photo/${product._id}`}
                       className="card-img-top object-fit-cover"
                       alt={product.name}
                       style={{ height: "250px", objectFit: "cover" }}

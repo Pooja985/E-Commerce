@@ -12,7 +12,7 @@ const SearchInput = () => {
 
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/search-product/${values.keyword}`
+        `/api/v1/product/search-product/${values.keyword}`
       );
       setValues({ ...values, result: data?.result });
       navigate("/search");

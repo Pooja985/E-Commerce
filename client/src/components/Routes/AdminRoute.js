@@ -17,14 +17,11 @@ export default function AdminRoute() {
           return;
         }
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/auth/admin-auth`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        );
+        const res = await axios.get(`/api/v1/auth/admin-auth`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
 
         console.log("Auth Check Response:", res.data);
 
