@@ -194,7 +194,8 @@ const HomePage = () => {
 
             {/* Load More Button */}
             <div className="text-center my-4">
-              {!checked.length &&
+              {Array.isArray(products) &&
+                !checked.length &&
                 !checkedRadio.length &&
                 products.length < total && (
                   <button
