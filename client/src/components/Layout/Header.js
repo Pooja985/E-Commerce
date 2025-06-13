@@ -1,20 +1,38 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Badge } from "antd";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
+import { useSearch } from "../../context/search"; // ✅ added
 import useCategory from "../../hooks/useCategory";
+import axios from "axios"; // ✅ added
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const [cart] = useCart();
+  const [values, setValues] = useSearch(); // ✅ added
+  const [keyword, setKeyword] = useState(""); // ✅ added
+  const navigate = useNavigate();
   const categories = useCategory();
 
   const handleLogout = () => {
     setAuth({ ...auth, user: null, token: "" });
     localStorage.removeItem("auth");
     toast.success("Logout Successfully");
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `/api/v1/product/search-product/${keyword}`
+      );
+      setValues({ keyword, result: data?.result });
+      navigate("/search");
+    } catch (error) {
+      console.error("Search failed:", error);
+    }
   };
 
   return (
@@ -42,15 +60,22 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav ms-auto align-items-lg-center w-100">
             {/* Search Bar */}
-            <div className="d-flex align-items-center ms-auto my-2 my-lg-0">
+            <form
+              className="d-flex align-items-center ms-auto my-2 my-lg-0"
+              onSubmit={handleSearch}
+            >
               <input
                 type="text"
                 className="form-control"
                 placeholder="Search"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
                 style={{ maxWidth: "200px" }}
               />
-              <button className="btn btn-outline-success ms-2">Search</button>
-            </div>
+              <button className="btn btn-outline-success ms-2" type="submit">
+                Search
+              </button>
+            </form>
 
             {/* Home */}
             <li className="nav-item">
