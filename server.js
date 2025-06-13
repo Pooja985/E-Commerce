@@ -26,7 +26,12 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-// Static files in production
+// API Routes - MUST come BEFORE catch-all route
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/category", categoryRoute);
+app.use("/api/v1/product", productRoute);
+
+// Serve static files in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "./client/build")));
 
@@ -34,11 +39,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
   });
 }
-
-// API Routes
-app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/category", categoryRoute);
-app.use("/api/v1/product", productRoute);
 
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to Ecommerce App</h1>");
